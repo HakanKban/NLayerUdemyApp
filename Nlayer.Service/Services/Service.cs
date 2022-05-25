@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
+using Nlayer.Service.Exceptions;
 using NLayer.Core.Repositories;
 using NLayer.Core.Services;
 using NLayer.Core.UnitOfWorks;
@@ -12,13 +13,13 @@ using System.Threading.Tasks;
 
 namespace Nlayer.Service.Services
 {
-    public class Service<T> : IService<T> where T : class
+    public class Service<T> : NLayer.Core.Services.IService<T> where T : class
     {
 
-        private readonly IGenericRepository<T> _repository;
+        private readonly NLayer.Core.Repositories.IService<T> _repository;
         private readonly IUnitofwork unitofwork;
 
-        public Service(IGenericRepository<T> repository, IUnitofwork unitofwork)
+        public Service(NLayer.Core.Repositories.IService<T> repository, IUnitofwork unitofwork)
         {
             _repository = repository;
             this.unitofwork = unitofwork;
@@ -52,7 +53,12 @@ namespace Nlayer.Service.Services
 
         public async Task<T> GetByIdAsync(int id)
         {
-            return await _repository.GetByIdAsync(id);
+            var hasProduct= await _repository.GetByIdAsync(id);
+            if(hasProduct==null)
+            {
+                throw new NotFoundException($"{typeof(T).Name} not found");
+            }
+            return hasProduct; // controllerda yapmamak için  burada hata fırlattık.
         }
 
         public async Task RemoveAsync(T entity)

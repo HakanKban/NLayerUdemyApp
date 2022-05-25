@@ -17,7 +17,7 @@ namespace Nlayer.Service.Services
 
         private readonly ICategoryRepository _categoryRepository;
         private readonly IMapper _mapper;
-        public CategoryService(IGenericRepository<Category> repository, IUnitofwork unitofwork, IMapper mapper = null, ICategoryRepository categoryRepository = null) : base(repository, unitofwork)
+        public CategoryService(NLayer.Core.Repositories.IService<Category> repository, IUnitofwork unitofwork, IMapper mapper = null, ICategoryRepository categoryRepository = null) : base(repository, unitofwork)
         {
             _mapper = mapper;
             _categoryRepository = categoryRepository;

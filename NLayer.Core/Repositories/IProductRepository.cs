@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NLayer.Core.Repositories
 {
-    public interface IProductRepository : IGenericRepository<Product>
+    public interface IProductRepository : IService<Product>
     {
         Task<List<Product>> GetProductsWithCategory(); // Custom eklediğimiz için.
     }

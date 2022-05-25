@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NLayer.Repository.Repositories
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : class
+    public class GenericRepository<T> : IService<T> where T : class
     {
         protected readonly AppDbContext _context;
         private readonly DbSet<T> _dbSet;

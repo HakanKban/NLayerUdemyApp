@@ -19,7 +19,7 @@ namespace Nlayer.Service.Services
 
      
 
-        public ProductService(IGenericRepository<Product> repository, IUnitofwork unitofwork, IProductRepository productRepository, IMapper mapper) : base(repository, unitofwork)
+        public ProductService(NLayer.Core.Repositories.IService<Product> repository, IUnitofwork unitofwork, IProductRepository productRepository, IMapper mapper) : base(repository, unitofwork)
         {
             _repository = productRepository;
             _mapper = mapper;
